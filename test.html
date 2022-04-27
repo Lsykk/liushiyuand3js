@@ -1,0 +1,1237 @@
+<!doctype html> 
+<html>
+  <head> 
+        <meta charset="utf-8"> 
+        <title>疫情地图数据可视化</title> 
+        <meta name="viewport" content="width=device-width">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        
+        <script src="d3.v3.min.js" charset="utf-8"></script> 
+        <!-- <script src="d3.v5.min.js" charset="utf-8"></script> -->
+  </head> 
+    <body> 
+                                                    <!-- //刘世源学习可视化路程记录 -->
+        <!-- <a>Hello World 1</a>
+        <a>Hello World 2</a> -->
+        <!-- <p>Apple</p>
+        <p id="idpear" class="myclass">Pear</p>
+        <p class="myclass">Banana</p> -->
+        <!-- <div class="divtest"></div> -->
+        <!-- =======第一章 简介与安装 -->
+        <div class="Barchart">
+            <iframe id="childFrame" src="barchart.html" width="900px" height="830px" frameborder="0"  name="ifr" scrolling="no">
+            </iframe>
+        </div>
+        <script>
+            // =======第二章 第一个程序helloworld
+            {
+                //d3.select("body").selectAll("p").text("www.ourd3js.com");      
+                // var a = d3.select("body").selectAll("a").text("liushiyuannbbbbbb");
+                // a.style('color', 'red').style("font-size","72px");                
+            }
+            // =======第三章 选择元素和绑定数据
+            {
+                // datum
+                // var str = "China";
+                // var body = d3.select("body");
+                // var p = body.selectAll("p");
+                // p.datum(str); //使得p标签与字符串str绑定在一起
+                // p.text(function(d, i) {
+                //     return "第 "+ i + " 个元素绑定的数据是 "+ d;            
+                // });
+                // d 代表数据，也就是与某元素绑定的数据。
+                // i 代表索引，代表数据的索引号，从 0 开始。
+
+                //data
+                // var dataset = ["I like dog","I like cat","I like snake"];
+                // var body = d3.select("body");
+                // var p = body.selectAll("p");  
+                // p.data(dataset).text(function(d,i){
+                //     return d;
+                // });
+            }
+            // =======第四章 选择、插入、删除元素
+            {
+                //选择第一个 p 元素
+                // p1 = d3.select("p");
+                // p1.style("color","red");
+
+                //选择三个 p 元素
+                // var body = d3.select("body");
+                // var p = body.selectAll("p");
+                // p.style("color","red");
+
+                //选择第二个 p 元素
+                //添加id
+                // var p2 = d3.select("body").select("#idpear");
+                // p2.style("color","red");
+
+                //选择后两个 p 元素
+                //添加class
+                // var p = d3.select("body").selectAll(".myclass");
+                // p.style("color","red");
+
+                //var body = d3.select("body");
+                // 插入元素append()
+                //body.append("p").text("append p element");
+
+                //插入元素insert()
+                //body.insert("p","#idpear").text("insert p element");
+
+                //删除元素
+                // var p = body.select("#idpear");
+                // p.remove();
+            }
+            // =======第五章 做一个简单的图表
+            {
+                // var width = 300;  //画布的宽度
+                // var height = 300;   //画布的高度
+                // var svg = d3.select("body")             //选择文档中的body元素
+                //             .append("svg")              //添加一个svg元素
+                //             .attr("width", width)       //设定宽度
+                //             .attr("height", height);    //设定高度
+
+                // var dataset = [ 250 , 210 , 170 , 130 , 90 ];  //数据（表示矩形的宽度）
+
+                // var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
+
+                // svg.selectAll("rect")               //选择svg内所有的矩形
+                //     .data(dataset)                  //绑定数组
+                //     .enter()                        //指定选择集的enter部分
+                //     .append("rect")                 //添加足够数量的矩形元素（数量和dataset数组的长度相同） 
+                //     .attr("x",20)
+                //     .attr("y",function(d,i){        //d是绑定的data的数据 i是索引号
+                //         return i * rectHeight;
+                //     })
+                //     .attr("width",function(d){      //设置长度
+                //         return d;
+                //     })
+                //     .attr("height",rectHeight-2)    //设置高度
+                //     .attr("fill","red");      //设置颜色
+            }
+            // =======第六章 比例尺的使用
+            {
+                //线性比例尺（数据是连续的）
+                // var dataset = [1.2, 2.3, 0.9, 1.5, 3.3];
+                // var min = d3.min(dataset);
+                // var max = d3.max(dataset);
+                // var linear = d3.scale.linear()          //线性比例尺
+                //                 .domain([min, max])     //设置定义域
+                //                 .range([0, 300]);       //设置值域
+                // console.log(linear(0.9));   //返回 0
+                // console.log(linear(2.3));    //返回 175
+                // console.log(linear(3.3));    //返回 300
+
+                //序数比例尺（数据是离散的）
+                // var index = [0, 1, 2, 3, 4];
+                // var color = ["red", "blue", "green", "yellow", "black"];
+                // var ordinal = d3.scale.ordinal()            //序数比例尺
+                //                     .domain(index)          //设置定义域
+                //                     .range(color);          //设置值域
+                // console.log(ordinal(0)); //返回 red
+                // console.log(ordinal(2)); //返回 green
+                // console.log(ordinal(4)); //返回 black
+
+                //给柱形图添加比例尺
+                // var dataset = [ 2.5 , 2.1 , 1.7 , 1.3 , 0.9 ];
+
+                // var linear = d3.scale.linear()
+                //                     .domain([0, d3.max(dataset)])
+                //                     .range([0, 250]);
+                
+                // var width = 300;  //画布的宽度
+                // var height = 300;   //画布的高度
+                // var svg = d3.select("body")             //选择文档中的body元素
+                //             .append("svg")              //添加一个svg元素
+                //             .attr("width", width)       //设定宽度
+                //             .attr("height", height);    //设定高度
+                // var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
+
+                // svg.selectAll("rect")
+                //     .data(dataset)
+                //     .enter()
+                //     .append("rect")
+                //     .attr("x",20)
+                //     .attr("y",function(d,i){
+                //         return i * rectHeight;
+                //     })
+                //     .attr("width",function(d){
+                //         return linear(d);   //在这里用比例尺
+                //     })
+                //     .attr("height",rectHeight-2)
+                //     .attr("fill","yellow");
+            }
+            // =======第七章 坐标轴
+            {
+                //数据
+                // var dataset = [ 2.5 , 2.1 , 1.7 , 1.3 , 0.9 ];
+                // //定义比例尺
+                // var linear = d3.scale.linear()
+                //                     .domain([0, d3.max(dataset)])
+                //                     .range([0, 250]);
+                // //定义画布
+                // var width = 300;  //画布的宽度
+                // var height = 300;   //画布的高度
+                // var svg = d3.select("body")             //选择文档中的body元素
+                //             .append("svg")              //添加一个svg元素
+                //             .attr("width", width)       //设定宽度
+                //             .attr("height", height);    //设定高度
+                // //定义坐标轴
+                // var axis = d3.svg.axis() //D3 中坐标轴的组件，能够在 SVG 中生成组成坐标轴的元素。
+                //                 .scale(linear)      //指定比例尺
+                //                 .orient("bottom")   //指定刻度的方向
+                //                 .ticks(7);          //指定刻度的数量
+                // //在svg中添加坐标轴
+                // svg.append("g")
+                //     .attr("class","axis")  //设置样式
+                //     .attr("transform","translate(20,130)") //坐标轴的位置
+                //     .call(axis);
+
+                // var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
+
+                // svg.selectAll("rect")
+                //     .data(dataset)
+                //     .enter()
+                //     .append("rect")
+                //     .attr("x",20)
+                //     .attr("y",function(d,i){
+                //         return i * rectHeight;
+                //     })
+                //     .attr("width",function(d){
+                //         return linear(d);   //在这里用比例尺
+                //     })
+                //     .attr("height",rectHeight-2)
+                //     .attr("fill","red");
+            }
+            // =======第八章 完整的柱形图
+            {
+                // //画布大小
+                // var width = 400;
+                // var height = 400;
+                // //在 body 里添加一个 SVG 画布   
+                // var svg = d3.select("body")
+                //             .append("svg")
+                //             .attr("width", width)
+                //             .attr("height", height);
+                // //画布周边的空白
+                // var padding = {left:30, right:30, top:20, bottom:20};
+                // //定义一个数组
+                // var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+
+                // //x轴的比例尺
+                // var xScale = d3.scale.ordinal()
+                //                 .domain(d3.range(dataset.length))//定义域
+                //                 .rangeRoundBands([0, width - padding.left - padding.right]);
+                // //y轴的比例尺
+                // var yScale = d3.scale.linear()
+                //                 .domain([0,d3.max(dataset)])//定义域
+                //                 .range([height - padding.top - padding.bottom, 0]);
+                // //定义x轴
+                // var xAxis = d3.svg.axis()
+                //     .scale(xScale)
+                //     .orient("bottom");
+                // //定义y轴
+                // var yAxis = d3.svg.axis()
+                //     .scale(yScale)
+                //     .orient("left");
+                // //矩形之间的空白
+                // var rectPadding = 4;
+
+                // //添加矩形元素
+                // var rects = svg.selectAll(".MyRect")
+                //         .data(dataset)
+                //         .enter()
+                //         .append("rect")
+                //         .attr("class","MyRect")
+                //         .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                //         .attr("x", function(d,i){
+                //             return xScale(i) + rectPadding/2;
+                //         } )
+                //         .attr("y",function(d){
+                //             return yScale(d);
+                //         })
+                //         .attr("width", xScale.rangeBand() - rectPadding )
+                //         .attr("height", function(d){
+                //             return height - padding.top - padding.bottom - yScale(d);
+                //         });
+
+                // //添加文字元素
+                // var texts = svg.selectAll(".MyText")
+                //         .data(dataset)
+                //         .enter()
+                //         .append("text")
+                //         .attr("class","MyText")
+                //         .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                //         .attr("x", function(d,i){
+                //             return xScale(i) + rectPadding/2;
+                //         } )
+                //         .attr("y",function(d){
+                //             return yScale(d);
+                //         })
+                //         .attr("dx",function(){
+                //             return (xScale.rangeBand() - rectPadding)/2;
+                //         })
+                //         .attr("dy",function(d){
+                //             return 20;
+                //         })
+                //         .text(function(d){
+                //             return d;
+                //         });
+
+                // //添加x轴
+                // svg.append("g")
+                // .attr("class","axis")
+                // .attr("transform","translate(" + padding.left + "," + (height - padding.bottom) + ")")
+                // .call(xAxis); 
+
+                // //添加y轴
+                // svg.append("g")
+                // .attr("class","axis")
+                // .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                // .call(yAxis);
+            }
+            // =======第九章 让图表动起来
+            {
+                //定义画布
+                // var width = 300;  //画布的宽度
+                // var height = 300;   //画布的高度
+                // var svg = d3.select("body")             //选择文档中的body元素
+                //             .append("svg")              //添加一个svg元素
+                //             .attr("width", width)       //设定宽度
+                //             .attr("height", height);    //设定高度
+                
+                // var circle1 = svg.append("circle")
+                //                 .attr("cx", 100)
+                //                 .attr("cy", 100)
+                //                 .attr("r", 45)
+                //                 .style("fill","green");
+                // //在1秒（1000毫秒）内将圆心坐标由100变为300
+                // circle1.transition()
+                //         .duration(2000)
+                //         .attr("cx", 300);
+
+                // var circle2 = svg.append("circle")
+                //                 .attr("cx", 100)
+                //                 .attr("cy", 200)
+                //                 .attr("r", 45)
+                //                 .style("fill","green");
+                // //在1.5秒（1500毫秒）内将圆心坐标由100变为300，
+                // //将颜色从绿色变为红色
+                // circle2.transition()
+                //     .duration(2000)
+                //     .attr("cx", 300)
+                //     .style("fill","red");
+                
+                // var circle3 = svg.append("circle")
+                //                 .attr("cx", 100)
+                //                 .attr("cy", 300)
+                //                 .attr("r", 45)
+                //                 .style("fill","green");
+
+                // //在2秒（2000毫秒）内将圆心坐标由100变为300
+                // //将颜色从绿色变为红色
+                // //将半径从45变成25
+                // //过渡方式采用bounce（在终点处弹跳几次）
+                // circle3.transition()
+                //     .duration(2000)
+                //     .ease("bounce")
+                //     .attr("cx", 300)
+                //     .style("fill","red")
+                //     .attr("r", 25);
+
+
+                 //画布大小
+                // var width = 400;
+                // var height = 400;
+                // //在 body 里添加一个 SVG 画布   
+                // var svg = d3.select("body")
+                //             .append("svg")
+                //             .attr("width", width)
+                //             .attr("height", height);
+                // //画布周边的空白
+                // var padding = {left:30, right:30, top:20, bottom:20};
+                // //定义一个数组
+                // var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+
+                // //x轴的比例尺
+                // var xScale = d3.scale.ordinal()
+                //                 .domain(d3.range(dataset.length))//定义域
+                //                 .rangeRoundBands([0, width - padding.left - padding.right]);
+                // //y轴的比例尺
+                // var yScale = d3.scale.linear()
+                //                 .domain([0,d3.max(dataset)])//定义域
+                //                 .range([height - padding.top - padding.bottom, 0]);
+                // //定义x轴
+                // var xAxis = d3.svg.axis()
+                //     .scale(xScale)
+                //     .orient("bottom");
+                // //定义y轴
+                // var yAxis = d3.svg.axis()
+                //     .scale(yScale)
+                //     .orient("left");
+                // //矩形之间的空白
+                // var rectPadding = 4;
+
+                // //添加矩形元素
+                // var rects = svg.selectAll(".MyRect")
+                //         .data(dataset)
+                //         .enter()
+                //         .append("rect")
+                //         .attr("class","MyRect")
+                //         .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                //         .attr("x", function(d,i){
+                //             return xScale(i) + rectPadding/2;
+                //         } )
+                //         .attr("y",function(d){
+                //             var min = yScale.domain()[0];
+                //             return yScale(min);
+                //         })
+                //         .transition()
+                //         .delay(function(d,i){
+                //             return i * 200;
+                //         })
+                //         .duration(2000)
+                //         .ease("bounce")
+                //         .attr("y",function(d){
+                //             return yScale(d);
+                //         })
+                //         .attr("width", xScale.rangeBand() - rectPadding )
+                //         .attr("height", function(d){
+                //             return height - padding.top - padding.bottom - yScale(d);
+                //         });
+
+                // //添加文字元素
+                // var texts = svg.selectAll(".MyText")
+                //         .data(dataset)
+                //         .enter()
+                //         .append("text")
+                //         .attr("class","MyText")
+                //         .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                //         .attr("x", function(d,i){
+                //             return xScale(i) + rectPadding/2;
+                //         } )
+                //         .attr("y",function(d){
+                //             var min = yScale.domain()[0];
+                //             return yScale(min);
+                //         })
+                //         .transition()
+                //         .delay(function(d,i){
+                //             return i * 200;
+                //         })
+                //         .duration(2000)
+                //         .ease("bounce")
+                //         .attr("y",function(d){
+                //             return yScale(d);
+                //         })
+                //         .attr("dx",function(){
+                //             return (xScale.rangeBand() - rectPadding)/2;
+                //         })
+                //         .attr("dy",function(d){
+                //             return 20;
+                //         })
+                //         .text(function(d){
+                //             return d;
+                //         });
+
+                // //添加x轴
+                // svg.append("g")
+                // .attr("class","axis")
+                // .attr("transform","translate(" + padding.left + "," + (height - padding.bottom) + ")")
+                // .call(xAxis); 
+
+                // //添加y轴
+                // svg.append("g")
+                // .attr("class","axis")
+                // .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                // .call(yAxis);
+            }
+            // =======第十章 理解 Update、Enter、Exit
+            {
+                // var dataset = [ 3 , 6 , 9 , 12 , 15 ];
+                // //选择body中的p元素
+                // var p = d3.select("body").selectAll("p");
+                // //获取update部分
+                // var update = p.data(dataset);
+                // //获取enter部分
+                // var enter = update.enter();
+                // //update部分的处理：更新属性值
+                // update.text(function(d){
+                //     return "update " + d;
+                // });
+                // //enter部分的处理：添加元素后赋予属性值
+                // enter.append("p")
+                //     .text(function(d){
+                //         return "enter " + d;
+                //     });
+
+                // var dataset = [ 3 ];
+                // //选择body中的p元素
+                // var p = d3.select("body").selectAll("p");
+                // //获取update部分
+                // var update = p.data(dataset);
+                // //获取exit部分
+                // var exit = update.exit();
+                // //update部分的处理：更新属性值
+                // update.text(function(d){
+                //     return "update " + d;
+                // });
+                // //exit部分的处理：修改p元素的属性
+                // exit.text(function(d){
+                //         return "exit";
+                //     });
+                // //exit部分的处理通常是删除元素
+                // //exit.remove();
+            }
+            // =======第十一章 交互式操作
+            {
+                // //画布大小
+                // var width = 400;
+                // var height = 400;
+                // //在 body 里添加一个 SVG 画布   
+                // var svg = d3.select("body")
+                //             .append("svg")
+                //             .attr("width", width)
+                //             .attr("height", height);
+                // //画布周边的空白
+                // var padding = {left:30, right:30, top:20, bottom:20};
+                // //定义一个数组
+                // var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+
+                // //x轴的比例尺
+                // var xScale = d3.scale.ordinal()
+                //                 .domain(d3.range(dataset.length))//定义域
+                //                 .rangeRoundBands([0, width - padding.left - padding.right]);
+                // //y轴的比例尺
+                // var yScale = d3.scale.linear()
+                //                 .domain([0,d3.max(dataset)])//定义域
+                //                 .range([height - padding.top - padding.bottom, 0]);
+                // //定义x轴
+                // var xAxis = d3.svg.axis()
+                //     .scale(xScale)
+                //     .orient("bottom");
+                // //定义y轴
+                // var yAxis = d3.svg.axis()
+                //     .scale(yScale)
+                //     .orient("left");
+                // //矩形之间的空白
+                // var rectPadding = 4;
+
+                // //添加矩形元素
+                // // var rects = svg.selectAll(".MyRect")
+                // //         .data(dataset)
+                // //         .enter()
+                // //         .append("rect")
+                // //         .attr("class","MyRect")
+                // //         .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                // //         .attr("x", function(d,i){
+                // //             return xScale(i) + rectPadding/2;
+                // //         } )
+                // //         .attr("y",function(d){
+                // //             return yScale(d);
+                // //         })
+                // //         .attr("width", xScale.rangeBand() - rectPadding )
+                // //         .attr("height", function(d){
+                // //             return height - padding.top - padding.bottom - yScale(d);
+                // //         });
+                // var rects = svg.selectAll(".MyRect")
+                //                     .data(dataset)
+                //                     .enter()
+                //                     .append("rect")
+                //                     .attr("class","MyRect")   //把类里的 fill 属性清空
+                //                     .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                //                     .attr("x", function(d,i){
+                //                         return xScale(i) + rectPadding/2;
+                //                     } )
+                //                     .attr("y",function(d){
+                //                         return yScale(d);
+                //                     })
+                //                     .attr("width", xScale.rangeBand() - rectPadding )
+                //                     .attr("height", function(d){
+                //                         return height - padding.top - padding.bottom - yScale(d);
+                //                     })
+                //                     .attr("fill","steelblue")       //填充颜色不要写在CSS里
+                //                     .on("mouseover",function(d,i){
+                //                         d3.select(this)
+                //                             .attr("fill","yellow");
+                //                     })
+                //                     .on("mouseout",function(d,i){
+                //                         d3.select(this)
+                //                             .transition()
+                //                             .duration(500)
+                //                             .attr("fill","steelblue");
+                //                     });      
+                // //添加文字元素
+                // var texts = svg.selectAll(".MyText")
+                //         .data(dataset)
+                //         .enter()
+                //         .append("text")
+                //         .attr("class","MyText")
+                //         .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                //         .attr("x", function(d,i){
+                //             return xScale(i) + rectPadding/2;
+                //         } )
+                //         .attr("y",function(d){
+                //             return yScale(d);
+                //         })
+                //         .attr("dx",function(){
+                //             return (xScale.rangeBand() - rectPadding)/2;
+                //         })
+                //         .attr("dy",function(d){
+                //             return 20;
+                //         })
+                //         .text(function(d){
+                //             return d;
+                //         });
+
+                // //添加x轴
+                // svg.append("g")
+                // .attr("class","axis")
+                // .attr("transform","translate(" + padding.left + "," + (height - padding.bottom) + ")")
+                // .call(xAxis); 
+
+                // //添加y轴
+                // svg.append("g")
+                // .attr("class","axis")
+                // .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+                // .call(yAxis);
+            }
+            // =======第十二章 布局
+            {
+                //布局有哪些
+                //D3 总共提供了 12 个布局：饼状图（Pie）、力导向图（Force）、弦图（Chord）、
+                //树状图（Tree）、集群图（Cluster）、捆图（Bundle）、打包图（Pack）、
+                //直方图（Histogram）、分区图（Partition）、堆栈图（Stack）、矩阵树图（Treemap）、层级图（Hierarchy）。
+            }
+            // =======第十三章 饼状图
+            {
+                // //画布大小
+                // var width = 400;
+                // var height = 400;
+                // //在 body 里添加一个 SVG 画布   
+                // var svg = d3.select("body")
+                //             .append("svg")
+                //             .attr("width", width)
+                //             .attr("height", height);
+                // //计算出适合于作图的数据。
+                // var dataset = [ 30 , 10 , 43 , 55 , 13 ];
+                // var pie = d3.layout.pie();
+                // var piedata = pie(dataset);
+                // console.log(piedata);
+                // //绘制图形
+                // //还需要一样工具：生成器。
+                // //这里要用到的叫做弧生成器，能够生成弧的路径，因为饼图的每一部分都是一段弧。
+                // var outerRadius = 150; //外半径
+                // var innerRadius = 0; //内半径，为0则中间没有空白
+
+                // var arc = d3.svg.arc()  //弧生成器
+                //     .innerRadius(innerRadius)   //设置内半径
+                //     .outerRadius(outerRadius);  //设置外半径
+                // //弧生成器返回的结果赋值给 arc。此时，arc 可以当做一个函数使用，把 piedata 作为参数传入，即可得到路径值。
+                // //先在 svg 里添加足够数量（5个）个分组元素（g），每一个分组用于存放一段弧的相关元素。
+                // var arcs = svg.selectAll("g")
+                //                 .data(piedata)
+                //                 .enter()
+                //                 .append("g")
+                //                 .attr("transform","translate("+ (width/2) +","+ (width/2) +")");
+
+                // //color 是一个颜色比例尺，它能根据传入的索引号获取相应的颜色值，定义如下。
+                // var color = d3.scale.category10();   //有十种颜色的颜色比例尺
+
+                // // /接下来对每个 g 元素，添加 path 。
+                // arcs.append("path")
+                //     .attr("fill",function(d,i){
+                //         return color(i);
+                //     })
+                //     .attr("d",function(d){
+                //         return arc(d);   //调用弧生成器，得到路径值
+                //     });
+
+
+
+                // //然后在每一个弧线中心添加文本。
+                // arcs.append("text")
+                //     .attr("transform",function(d){
+                //         return "translate(" + arc.centroid(d) + ")";
+                //     })
+                //     .attr("text-anchor","middle")
+                //     .text(function(d){
+                //         return d.data;
+                //     });
+ 
+            }
+            // =======第十四章 力导向图
+            {
+                // var nodes = [ { name: "桂林" }, { name: "广州" },{ name: "厦门" }, { name: "杭州" },
+                //                 { name: "上海" }, { name: "青岛" },{ name: "天津" } ];
+
+                // var edges = [ { source : 0 , target: 1 } , { source : 0 , target: 2 } ,
+                //             { source : 0 , target: 3 } , { source : 1 , target: 4 } ,
+                //             { source : 1 , target: 5 } , { source : 1 , target: 6 } ];
+                // //布局（数据转换）
+                // //定义一个力导向图的布局如下。
+                // var width = 400;
+                // var height = 400;
+                // var force = d3.layout.force()
+                //                 .nodes(nodes) //指定节点数组
+                //                 .links(edges) //指定连线数组
+                //                 .size([width,height]) //指定作用域范围
+                //                 .linkDistance(150) //指定连线长度
+                //                 .charge([-400]); //相互之间的作用力
+                // //然后，使力学作用生效：
+                // force.start();    //开始作用
+                // //nodes 和 edges 的数据都发生了变化。在控制台输出一下，看看发生了什么变化。
+                // console.log(nodes);
+                // console.log(edges);
+
+                // //绘制
+                // //有了转换后的数据，就可以作图了。分别绘制三种图形元素：
+                // //line，线段，表示连线。
+                // //circle，圆，表示节点。
+                // //text，文字，描述节点。
+                // //画布大小
+                // var width = 400;
+                // var height = 400;
+                // //在 body 里添加一个 SVG 画布   
+                // var svg = d3.select("body")
+                //             .append("svg")
+                //             .attr("width", width)
+                //             .attr("height", height);
+                // //添加连线 
+                // var svg_edges = svg.selectAll("line")
+                //     .data(edges)
+                //     .enter()
+                //     .append("line")
+                //     .style("stroke","#ccc")
+                //     .style("stroke-width",1);
+
+                // var color = d3.scale.category20();
+
+                // //添加节点 
+                // var svg_nodes = svg.selectAll("circle")
+                //     .data(nodes)
+                //     .enter()
+                //     .append("circle")
+                //     .attr("r",20)
+                //     .style("fill",function(d,i){
+                //         return color(i);
+                //     })
+                //     .call(force.drag);  //使得节点能够拖动
+
+                // //添加描述节点的文字
+                // var svg_texts = svg.selectAll("text")
+                //     .data(nodes)
+                //     .enter()
+                //     .append("text")
+                //     .style("fill", "black")
+                //     .attr("dx", 20)
+                //     .attr("dy", 8)
+                //     .text(function(d){
+                //         return d.name;
+                //     });
+
+                // //调用 call( force.drag ) 后节点可被拖动。force.drag() 是一个函数，
+                // //最后，还有一段最重要的代码。由于力导向图是不断运动的，每一时刻都在发生更新，因此，必须不断更新节点和连线的位置。
+                // force.on("tick", function(){ //对于每一个时间间隔
+                //     //更新连线坐标
+                //     svg_edges.attr("x1",function(d){ return d.source.x; })
+                //         .attr("y1",function(d){ return d.source.y; })
+                //         .attr("x2",function(d){ return d.target.x; })
+                //         .attr("y2",function(d){ return d.target.y; });
+
+                //     //更新节点坐标
+                //     svg_nodes.attr("cx",function(d){ return d.x; })
+                //         .attr("cy",function(d){ return d.y; });
+
+                //     //更新文字坐标
+                //     svg_texts.attr("x", function(d){ return d.x; })
+                //     .attr("y", function(d){ return d.y; });
+                // });
+            }
+            // =======第十五章 树状图
+            {
+                // //画布大小
+                // var width = 400;
+                // var height = 400;
+                // //在 body 里添加一个 SVG 画布   
+                // var svg = d3.select("body")
+                //             .append("svg")
+                //             .attr("width", width)
+                //             .attr("height", height);
+                // //画布周边的空白
+                // var padding = {left:30, right:30, top:20, bottom:20};
+                // //定义一个集群图布局
+                // var tree = d3.layout.tree() 
+                //                     .size([width, height-200])
+                //                     .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2); });
+                // //转换数据
+                
+                // d3.json("citytest.json", function(error, root) {
+
+                //     var nodes = tree.nodes(root);
+                //     var links = tree.links(nodes);
+                //     console.log(nodes);
+                //     console.log(links);
+
+                //     //绘制
+                //     //创建一个对角线生成器：
+                //     var diagonal = d3.svg.diagonal()
+                //                         .projection(function(d) { return [padding.left + d.y, d.x]; });
+
+                //     //绘制连线时，使用方法如下：
+                //     var link = svg.selectAll(".link")
+                //                     .data(links)
+                //                     .enter()
+                //                     .append("path")
+                //                     .attr("class", "link")
+                //                     .attr("d", diagonal);   //使用对角线生成器
+
+                //     //获取所有节点元素
+                //     var node = svg.selectAll(".node")
+                //         .data(nodes)
+                //         .enter()
+                //         .append("g")
+                //         .attr("class", "node")
+                //         .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+                //     //节点元素绘制圆
+                //     node.append("circle")
+                //         .attr("r", 4.5)
+                //         .attr("cx",35);
+                //     //添加文本
+                //     node.append("text")
+                //         .attr("dx", function(d) { return d.children ? 25 : 8 + 35; })
+                //         .attr("dy", 3)
+                //         .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+                //         .text(function(d) { return d.name; });
+                // });
+            }
+            // =======第十六章 中国地图
+            {
+                var w = 700,h = 800;
+                var svg = d3.select('body')
+                            .append('svg')
+                            .attr('width',w)
+                            .attr('height',h)
+                            .attr('transform','translate(0,0)');
+
+                const places = [
+                    {
+                        'name': '北京',
+                        'confirm':'593'
+                    },
+                    {
+                        'name': '天津',
+                        'confirm':'189'
+                    },
+                    {
+                        'name': '河北',
+                        'confirm':'328',
+                    },
+                    {
+                        'name': '山西',
+                        'confirm':'197'
+                    },
+                    {
+                        'name': '内蒙古',
+                        'confirm':'194'
+                    },
+                    {
+                        'name': '辽宁',
+                        'confirm':'146',
+                    },
+                    {
+                        'name': '吉林',
+                        'confirm':'106'
+                    },
+                    {
+                        'name': '黑龙江',
+                        'confirm':'913'
+                    },
+                    {
+                        'name': '上海',
+                        'confirm':'638',
+                    },
+                    {
+                        'name': '江苏',
+                        'confirm':'653'
+                    },
+                    {
+                        'name': '浙江',
+                        'confirm':'1268'
+                    },
+                    {
+                        'name': '安徽',
+                        'confirm':'991',
+                    },
+                    {
+                        'name': '福建',
+                        'confirm':'355'
+                    },
+                    {
+                        'name': '江西',
+                        'confirm':'937'
+                    },
+                    {
+                        'name': '山东',
+                        'confirm':'787',
+                    },
+                    {
+                        'name': '河南',
+                        'confirm':'1276'
+                    },
+                    {
+                        'name': '湖北',
+                        'confirm':'68128'
+                    },
+                    {
+                        'name': '湖南',
+                        'confirm':'1019',
+                    },
+                    {
+                        'name': '广东',
+                        'confirm':'1582'
+                    },
+                    {
+                        'name': '广西',
+                        'confirm':'254'
+                    },
+                    {
+                        'name': '海南',
+                        'confirm':'168',
+                    },
+                    {
+                        'name': '重庆',
+                        'confirm':'579'
+                    },
+                    {
+                        'name': '四川',
+                        'confirm':'561'
+                    },
+                    {
+                        'name': '贵州',
+                        'confirm':'147',
+                    },
+                    {
+                        'name': '云南',
+                        'confirm':'184'
+                    },
+                    {
+                        'name': '西藏',
+                        'confirm':'1'
+                    },
+                    {
+                        'name': '陕西',
+                        'confirm':'277',
+                    },
+                    {
+                        'name': '甘肃',
+                        'confirm':'139'
+                    },
+                    {
+                        'name': '青海',
+                        'confirm':'18'
+                    },
+                    {
+                        'name': '宁夏',
+                        'confirm':'75',
+                    },
+                    {
+                        'name': '新疆',
+                        'confirm':'76'
+                    },
+                    {
+                        'name': '台湾',
+                        'confirm':'425'
+                    },
+                    {
+                        'name': '香港',
+                        'confirm':'1029',
+                    },
+                    {
+                        'name': '澳门',
+                        'confirm':'45'
+                    }
+                ];
+
+                const maxData = 1000;
+                const minData = 10;
+
+                const color = d3.scale.linear().domain([0, maxData])
+                                            .range(['#FFE4B5', '#B22222']);
+
+                //d3.geo  是d3中一些地图相关的方法
+                //geo
+                var projection =d3.geo.mercator()//投影的方法
+                                    .center([107,31])//经纬度
+                                    .scale(600)//放大的倍数
+                                    .translate([w/2,h/2]);//投影在某个位置
+                //坐标的转换	把相应经纬度的点 转换成 svg里面d属性相应的要去画的  坐标点
+                var path = d3.geo.path()
+                            .projection(projection);
+                
+                //d3中做服务器请求的  方法来的	
+                d3.json('china.json',function (err,root) {
+                    //root  是用d3请求回来的数据
+                    console.log(root.features);//数组  34个
+
+                    // d3.select('svg').selectAll('path')
+                    //                 .data(root.features)
+                    //                 .enter()
+                    //                 .append('path')
+                    //                 .attr('stroke','gray')
+                    //                 .attr('stroke-width','1')
+                    //                 .attr('d',function (data,index) {
+                    //                     return path(data);
+                    //                 })
+                    //                 .attr('fill',function (data,index) {
+                    //                     return '#'+ Math.floor(0xffffff).toString(16);
+                    //                 })
+                    //                 .on('mouseover',function () {
+                    //                     //this dom对象
+                    //                     d3.select(this)
+                    //                     .attr('fill','yellow')
+                    //                 })
+                    //                 .on('mouseout',function () {
+                    //                     d3.select(this)
+                    //                     .attr('fill','#'+ Math.floor(0xffffff).toString(16))
+                    //                 })
+                    
+                    const paths = svg.selectAll("path.map")
+                                        .data(root.features)
+                                        .enter()
+                                        .append("path")
+                                        .classed("map",true)
+                                        .attr("fill", "white") 
+                                        .attr("stroke", "gray")
+                                        .attr('stroke-width','1')
+                                        .attr("d", path)
+                                        .on('mouseover',function () {
+                                            //this dom对象
+                                            d3.select(this)
+                                            .attr('fill','yellow')
+                                        })
+                                        .on('mouseout',function () {
+                                            // d3.select(this)
+                                            // .attr('fill','#'+ Math.floor(0xffffff).toString(16))
+                                            paths.transition()
+                                            // .duration(10000)
+                                            .attr('fill', (d , i) => {
+                                                // console.log(d.properties.name); 
+                                                let prov = d.properties.name;
+                                                console.log(places[i].confirm);
+                                                console.log(color(places[i].confirm));
+                                                // let curProvData = places.find((provData) => provData[0] === prov.slice(0, 2))
+
+                                                // console.log(curProvData);
+                                
+                                                // return color(d.properties.confirm)
+                                                return color(places[i].confirm)
+                                            });
+                                        })
+
+                    // animationType = function() {
+                    //       return d3.transtion().ease()
+                    // }      
+                    // const t = animationType();
+
+	
+                    paths.transition()
+                        .duration(7000)
+                        .attr('fill', (d , i) => {
+                            // console.log(d.properties.name); 
+                            let prov = d.properties.name;
+                            console.log(places[i].confirm);
+                            console.log(color(places[i].confirm));
+                            // let curProvData = places.find((provData) => provData[0] === prov.slice(0, 2))
+
+                            // console.log(curProvData);
+            
+                            // return color(d.properties.confirm)
+                            return color(places[i].confirm)
+                        });
+
+                    d3.select('svg').selectAll("circle")
+                                    .data(root.features)
+                                    .enter()
+                                    .append("svg:circle")
+                                    .attr('class', 'location')
+                                    .attr("cx", function(d,i){
+                                        // console.log(d.properties.centroid[0])
+                                        // return projection([d.lon,d.lat])[0];
+                                        // console.log(projection(d.properties.center)[0]);
+                                        return projection(d.properties.center)[0];
+                                    })
+                                    
+                                    .attr("cy", function(d,i){
+                                        // console.log(d.properties.centroid[1])
+                                        // return projection([d.lon,d.lat])[1];
+                                        // return projection(d.properties.centroid);
+                                        // console.log(projection(d.properties.center)[1]);
+                                        return projection(d.properties.center)[1];
+                                    })
+                                    .attr("r", 3)
+                                    .attr('fill','red');
+                    
+                    d3.select('svg').selectAll("text")
+                                    .data(root.features)
+                                    .enter()
+                                    .append("svg:text")
+                                    .text(function(d){return d.properties.name;})
+                                    .attr("x", function(d,i){
+                                        // console.log(d.properties.centroid[0])
+                                        // return projection([d.lon,d.lat])[0];
+                                        // console.log(projection(d.properties.center)[0]);
+                                        if(d.properties.center[0]=='113.54909')//处理澳门
+			                                return projection(d.properties.center)[0] - 15;
+                                        else if(d.properties.center[0]=='114.173355')//处理香港
+			                                return projection(d.properties.center)[0] + 5;
+                                        else
+                                            return projection(d.properties.center)[0] - 10;
+                                    })
+                                    
+                                    .attr("y", function(d,i){
+                                        // console.log(d.properties.centroid[1])
+                                        // return projection([d.lon,d.lat])[1];
+                                        // return projection(d.properties.centroid);
+                                        // console.log(projection(d.properties.center)[1]);
+                                        if(d.properties.center[0]=='113.54909')//处理澳门
+			                                return projection(d.properties.center)[1] + 18;
+                                        else if(d.properties.center[0]=='114.173355')//处理香港
+			                                return projection(d.properties.center)[1] + 12;
+                                        else
+                                            return projection(d.properties.center)[1] - 10;
+                                    })
+                                    .attr('fill','#000')
+		                            .attr('font-size','10px')
+                })
+                //返回一个随机16进制的 颜色
+                function color16(){
+                    return '#'+Math.floor(Math.random()*0xffffff).toString(16);
+                }
+
+
+
+                // 显示渐变矩形条
+                const linearGradient = svg.append("defs")
+                    .append("linearGradient")
+                    .attr("id", "linearColor")
+                    //颜色渐变方向
+                    .attr("x1", "0%")
+                    .attr("y1", "100%")
+                    .attr("x2", "0%")
+                    .attr("y2", "0%");
+                // //设置矩形条开始颜色
+                linearGradient.append("stop")
+                    .attr("offset", "0%")
+                    .attr("stop-color", '#FFE4B5');
+                // //设置结束颜色
+                linearGradient.append("stop")
+                    .attr("offset", "100%")
+                    .attr("stop-color", '#B22222');
+
+                svg.append("rect")
+                    //x,y 矩形的左上角坐标
+                    .attr("x", 800)
+                    .attr("y", 800) // 83为矩形的高
+                    //矩形的宽高
+                    .attr("width", 16)
+                    .attr("height", 83)
+                    //引用上面的id 设置颜色
+                    .style("fill", "url(#" + linearGradient.attr("id") + ")");
+                //设置文字
+
+                // 数据初值
+                svg.append("text")
+                    .attr("x", 800)
+                    .attr("y", 800)
+                    .text(0)
+                    .classed("linear-text", true);
+                // visualMap title
+                svg.append("text")
+                    .attr("x", 900)
+                    .attr("y", 900) // 8为padding
+                    .text('市场规模')
+                    .classed("linear-text", true);
+                //数据末值
+                svg.append("text")
+                    .attr("x", 1000)
+                    .attr("y", 1000) // 12 为字体大小
+                    .text(maxData)
+                    .classed("linear-text", true)
+
+            }
+        </script>
+        <style>
+            .Barchart{
+                display: block;
+                float: left;
+                width: 50%;
+            }
+            .axis path,
+            .axis line{
+                fill: none;
+                stroke: red;
+                shape-rendering: crispEdges;
+            }
+            
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
+
+            .MyRect{
+                /* fill: red; */
+                stroke: red;
+            }
+
+            .divtest{
+                width: 300px;
+                height: 300px;
+                /* background-color: red; */
+            }
+
+            .node circle {
+                fill:#FFF;
+                stroke: steelblue;
+                stroke-width: 1.5px;
+            }
+
+            .node {
+                font: 12px sans-serif;
+            }
+
+            .link {
+                fill: none;
+                stroke: #ccc;
+                stroke-width: 1.5px;
+            }
+
+            #tooltip {
+                opacity: 0;
+                position: absolute;
+                padding: 10px;
+                background: #333333;
+                border: 2px solid #e8e8e8;
+                color: #33cc99;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .fangkuang{
+			width: 100px;
+			height: 100px;
+			padding: 5px;
+			
+			opacity: 0.6;
+			border:1px solid #fff;
+			border-radius: 5px;
+			
+            }
+            #fangkuang1{
+                pointer-events: none;
+            }
+            #fangkuang2{
+                pointer-events: none;
+            }
+            </style>
+    </body> 
+</html>
